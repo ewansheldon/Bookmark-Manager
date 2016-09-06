@@ -8,7 +8,7 @@ class Link
   include DataMapper::Resource
 
   has n, :tags, through: Resource
-
+  #tags is a bit like a sub table or array of tags.
 
  property :id,     Serial
  property :title,  String
