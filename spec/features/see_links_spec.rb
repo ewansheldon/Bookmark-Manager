@@ -36,7 +36,7 @@ feature 'To see a list of links of the homepage' do
     visit '/links/new'
     fill_in('bookmark_title', with: 'Yahoo')
     fill_in('link_url', with: 'www.yahoo.com')
-    fill_in('tag', with: 'Important')
+    fill_in('tag_name', with: 'Important')
     click_button('Submit')
     visit '/links'
     within 'ul#links' do
