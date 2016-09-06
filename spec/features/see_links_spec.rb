@@ -14,8 +14,8 @@ feature 'To see a list of links of the homepage' do
 
   scenario 'user can add a new link' do
     visit '/links/new'
-    fill_in('Bookmark title', with: 'Yahoo')
-    fill_in('Link url', with: 'www.yahoo.com')
+    fill_in('bookmark_title', with: 'Yahoo')
+    fill_in('link_url', with: 'www.yahoo.com')
     click_button('Submit')
     visit '/links'
     within 'ul#links' do
