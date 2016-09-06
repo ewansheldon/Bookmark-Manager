@@ -7,5 +7,9 @@ source "https://rubygems.org"
 # gem "rails"
   gem 'data_mapper'
   gem 'dm-postgres-adapter'
-  gem 'rspec-sinatra'
-  gem 'capybara'
+
+  group :test do
+    gem 'rspec-sinatra'
+    gem 'capybara'
+    gem 'database_cleaner'
+  end
