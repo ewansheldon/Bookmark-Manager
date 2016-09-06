@@ -38,9 +38,11 @@ feature 'To see a list of links of the homepage' do
     fill_in('link_url', with: 'www.yahoo.com')
     fill_in('tag_name', with: 'Important')
     click_button('Submit')
-    visit '/links'
-    within 'ul#links' do
-      expect(page).to have_content('Important')
-    end
+    # visit '/links'
+    # within 'ul#links' do
+    #   expect(page).to have_content('Important')
+    link = Link.first
+   expect(link.tags.map(&:name)).to include('Important')
+    # end
   end
 end
