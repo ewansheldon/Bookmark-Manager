@@ -31,4 +31,16 @@ feature 'To see a list of links of the homepage' do
       expect(page).to have_content('Yahoo')
     end
   end
+
+  scenario 'user can add a tag to a new link' do
+    visit '/links/new'
+    fill_in('bookmark_title', with: 'Yahoo')
+    fill_in('link_url', with: 'www.yahoo.com')
+    fill_in('tag', with: 'Important')
+    click_button('Submit')
+    visit '/links'
+    within 'ul#links' do
+      expect(page).to have_content('Important')
+    end
+  end
 end
