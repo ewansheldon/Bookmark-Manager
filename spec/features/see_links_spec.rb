@@ -67,4 +67,14 @@ feature 'To see a list of links of the homepage' do
       expect(page).not_to have_content('Yahoo')
     end
   end
+
+  scenario 'user can add multiple tags to a link' do
+    visit '/links/new'
+    fill_in('bookmark_title', with: 'Google')
+    fill_in('link_url', with: 'www.google.com')
+    fill_in('tag_name', with: 'bubbles search')
+    click_button('Submit')
+    link = Link.first
+    expect(link.tags.map(&:name)).to include('bubbles', 'search')
+  end
 end

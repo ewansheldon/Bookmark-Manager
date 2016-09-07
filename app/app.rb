@@ -14,8 +14,6 @@ class BookmarkManager < Sinatra::Base
 
   get '/links' do
     @links = Link.all
-    p @links
-    @links.each {|link| p link.tags}
     erb :'links/index'
   end
 
@@ -25,8 +23,9 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do #add links to db
     link = Link.create(url: params[:link_url], title: params[:bookmark_title])
-    tag = Tag.first_or_create(name: params[:tag_name]) #checks if it exists, if not it creates the tag because you don't want to have more than one of the same tag
-    link.tags << tag #this is adding the tag to the link's personal table (or array?) of tags
+    params[:tag_name].split.each do |tag|
+      link.tags << Tag.create(name: tag)
+    end
     link.save
     redirect '/links'
   end
