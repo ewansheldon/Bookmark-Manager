@@ -1,14 +1,19 @@
 require 'data_mapper'
 require 'dm-postgres-adapter'
 require_relative '../data_mapper_setup'
+require 'bcrypt'
 
 class User
 
   include DataMapper::Resource
 
-  property :user_id,   Serial
+  property :id,   Serial
   property :email,  String
-  property :hashed_password,  String
+  property :password_digest,  String
+
+  def password=(password)
+    self.password_digest = BCrypt::Password.create(password)
+  end
 
 end
 
