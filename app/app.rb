@@ -14,6 +14,8 @@ class BookmarkManager < Sinatra::Base
 
   get '/links' do
     @links = Link.all
+    p @links
+    @links.each {|link| p link.tags}
     erb :'links/index'
   end
 
@@ -27,6 +29,12 @@ class BookmarkManager < Sinatra::Base
     link.tags << tag #this is adding the tag to the link's personal table (or array?) of tags
     link.save
     redirect '/links'
+  end
+
+  get '/tags/:tag' do
+    tag = Tag.first(name: params[:tag])
+    @links = tag ? tag.links : []
+    erb :'links/index'
   end
 
   # start the server if ruby file executed directly

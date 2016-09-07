@@ -45,4 +45,26 @@ feature 'To see a list of links of the homepage' do
    expect(link.tags.map(&:name)).to include('Important')
     # end
   end
+
+  scenario 'user can see links by filtering via the URL' do
+    visit '/links/new'
+    fill_in('bookmark_title', with: 'Yahoo')
+    fill_in('link_url', with: 'www.yahoo.com')
+    fill_in('tag_name', with: 'Important')
+    click_button('Submit')
+
+    visit '/links/new'
+    fill_in('bookmark_title', with: 'Google')
+    fill_in('link_url', with: 'www.google.com')
+    fill_in('tag_name', with: 'bubbles')
+    click_button('Submit')
+
+    expect(page.status_code).to eq(200)
+
+    visit '/tags/bubbles'
+    within 'ul#links' do
+      expect(page).to have_content('Google')
+      expect(page).not_to have_content('Yahoo')
+    end
+  end
 end
