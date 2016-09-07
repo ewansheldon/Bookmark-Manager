@@ -15,12 +15,12 @@ feature "Add link" do
     visit '/links/new'
     fill_in('title', with: 'Google')
     fill_in('url', with: 'www.google.com')
-    fill_in('tag', with: 'search engine')
+    fill_in('tag', with: 'search-engine')
 
     click_button('submit')
     link = Link.first
     expect(page.status_code).to eq(200)
-    expect(link.tags.map(&:name)).to include('search engine')
+    expect(link.tags.map(&:name)).to include('search-engine')
   end
 
 end

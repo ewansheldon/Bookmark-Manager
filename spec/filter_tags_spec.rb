@@ -17,4 +17,14 @@ feature 'Filter tags' do
     expect(page).to have_content('Big Bubble4')
     expect(page).to have_content('Big Bubble5')
   end
+
+  scenario "user can enter multiple tags" do
+    visit '/links/new'
+    fill_in('title', with: "Makers")
+    fill_in("url", with: "www.makersacademy.com")
+    fill_in("tag", with: 'education tech')
+    click_button('submit')
+    link = Link.first
+    expect(link.tags.map{|x| x.name}).to include('education', 'tech')
+  end
 end
