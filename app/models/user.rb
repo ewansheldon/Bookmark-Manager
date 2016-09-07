@@ -2,20 +2,16 @@ require 'data_mapper'
 require 'dm-postgres-adapter'
 require_relative '../data_mapper_setup'
 
-# This class corresponds to a table in the database
-class Link
+class User
 
   include DataMapper::Resource
 
-  has n, :tags, through: Resource
-  #tags is a bit like a sub table or array of tags.
-
- property :id,     Serial
- property :title,  String
- property :url,    String
+  property :user_id,   Serial
+  property :email,  String
+  property :hashed_password,  String
 
 end
 
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/bookmark_manager_#{ENV['RACK_ENV']}")
 DataMapper.finalize
-# DataMapper.auto_upgrade!
