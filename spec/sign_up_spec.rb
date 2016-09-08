@@ -10,5 +10,9 @@ feature 'user sign up' do
     expect(User.first.email).to eq('test@yahoo.com')
   end
 
+  scenario "I cant sign up if my passwords dont match" do
+    expect {false_signup}.not_to change(User, :count)
+    expect(page.status_code).to eq(200)
+  end
 
 end
