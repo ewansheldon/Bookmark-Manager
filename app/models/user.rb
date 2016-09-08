@@ -20,8 +20,7 @@ class User
     message: "Must enter a valid email address"
   validates_format_of :email, :as => :email_address,
     message: "Must enter a valid email address"
-  validates_uniqueness_of :email,
-    message: "Must enter a valid email address"
+  validates_uniqueness_of :email
 
   def password=(password)
     @password = password
