@@ -21,11 +21,20 @@ feature 'user sign up' do
     expect {no_email_signup}.not_to change(User, :count)
     expect(page.status_code).to eq(200)
     expect(current_path).to eq '/users'
+    expect(page).to have_content('Must enter a valid email address')
   end
 
   scenario "user cannot create account with a invalid email" do
     expect {invalid_email_signup}.not_to change(User, :count)
     expect(page.status_code).to eq(200)
     expect(current_path).to eq '/users'
+  end
+
+  scenario 'cannot create multiple accounts with same email address' do
+    signup
+    expect {signup}.not_to change(User, :count)
+    expect(page.status_code).to eq(200)
+    expect(current_path).to eq '/users'
+    expect(page).to have_content('Email is already taken')
   end
 end
