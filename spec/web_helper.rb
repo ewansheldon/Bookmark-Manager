@@ -15,3 +15,19 @@ def false_signup
   fill_in(:password_confirmation, with: 'test12')
   click_button('sign up')
 end
+
+def no_email_signup
+  visit '/users/new'
+  fill_in(:email,    with: '')
+  fill_in(:password, with: 'test123')
+  fill_in(:password_confirmation, with: 'test123')
+  click_button('sign up')
+end
+
+def invalid_email_signup
+  visit '/users/new'
+  fill_in(:email,    with: 'invalid@email')
+  fill_in(:password, with: 'test123')
+  fill_in(:password_confirmation, with: 'test123')
+  click_button('sign up')
+end
