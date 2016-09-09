@@ -17,7 +17,7 @@ class Bookmark < Sinatra::Base
   end
 
   get '/' do
-    redirect '/links'
+    redirect '/users/new'
   end
 
   get '/links' do
@@ -76,6 +76,11 @@ class Bookmark < Sinatra::Base
     end
   end
 
+  post '/sessions/end' do
+    session[:user_id] = nil
+    flash[:logout] = 'See you again soon!'
+    redirect '/sessions/new'
+  end
 
   # start the server if ruby file executed directly
   run! if app_file == $0
