@@ -11,3 +11,11 @@ feature 'sign in' do
     expect(page).to have_content 'Welcome, test@yahoo.com'
   end
 end
+
+feature 'password recovery' do
+  scenario 'user can reset password' do
+    visit '/sessions/new'
+    click_link 'Forgotten password?'
+    expect(page).to have_content 'Please enter your email address:'
+  end
+end
