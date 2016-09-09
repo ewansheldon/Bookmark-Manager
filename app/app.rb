@@ -6,6 +6,8 @@ require_relative 'data_mapper_setup'
 
 class Bookmark < Sinatra::Base
 
+  use Rack::MethodOverride
+
   enable :sessions
   set :session_secret, "super secret"
   register Sinatra::Flash
@@ -76,7 +78,7 @@ class Bookmark < Sinatra::Base
     end
   end
 
-  post '/sessions/end' do
+  delete '/sessions/end' do
     session[:user_id] = nil
     flash[:logout] = 'See you again soon!'
     redirect '/sessions/new'
